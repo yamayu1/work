@@ -1,0 +1,8 @@
+version: '3'
+services:
+  node_code:
+    container_name: node_tic_tac_toe
+    build: .
+    volumes:
+      - ./tic-tac-toe/:/tic-tac-toe
+    tty: true
