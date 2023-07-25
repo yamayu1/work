@@ -1,5 +1,5 @@
 {
-  "name": "tic-tac-toe",
+  "name": "tic",
   "version": "1.0.0",
   "main": "index.js",
   "type": "module",
