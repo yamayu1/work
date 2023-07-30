@@ -1,42 +1,36 @@
-import { error } from "./error.js";
-import { choiceError } from "./error.js";
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import { Error_number, choiceError, Error_coordinate } from "./error.js";
+import * as readline from 'node:readline/promises';
 
-export function PlayerChoice(messageList){
-    console.log(messageList["select_turn"]);
-
-    const readline = require('readline');
-    const readInterface = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
-    readInterface.question("入力してください >",
-            inputString=>{
-                const choice = inputString;
-                readInterface.close();
-                console.log( `入力された文字：[${inputString }]`);
-               });
-    const errorChoice = choiceError(choice);
-    if(errorChoice[0] === true ){
-        console.log(errorChoice[1]);
-        return PlayerMove(messageList);
+export async function PlayerCoordinate(messageList,input,output,board){
+    const rl = readline.createInterface({ input, output });
+    let x = await rl.question(messageList["coordinate_x"]);
+    let y = await rl.question(messageList["coordinate_y"]);
+    rl.close();
+    const [error_number, errorMessage] = Error_number(x,y);
+    if(error_number === true){
+        console.log(errorMessage);
+        return PlayerCoordinate(messageList,input,output,board);
     }
-    return[choice];
- }   
-
-export function PlayerCoordinate(messageList,board){
-    console.log(messageList["coordinate"]);
-
-//入力するインターフェースが必要
-
-    const x = parseInt(process.argv[2], 10);
-    const y = parseInt(process.argv[3], 10);
-
-    const Error = error(x,y,board);
-    if(Error[0] === true ){
-        console.log(Error[1]);
-        return PlayerCoordinate(messageList);
+    const [error_coordinate, errorMessage2] = Error_coordinate(x,y,board);
+    if(error_coordinate === true){
+        console.log(errorMessage2);
+        return PlayerCoordinate(messageList,input,output,board)
     }
-    return[x,y];
+    return [y,x];
 }
+
+export async function PlayerChoice(messageList, input, output) {
+    const rl = readline.createInterface({ input, output });
+    const answer = await rl.question(messageList["select_turn"]);
+    rl.close();
+    
+    const [error, errorMessage] = choiceError(answer);
+    if(error === true){
+    console.log(errorMessage);
+    return PlayerChoice(messageList,input,output);
+    }
+    return answer;
+}
+
+
+//ハンズオンJavaScriptの本を読む、11章は飛ばす
