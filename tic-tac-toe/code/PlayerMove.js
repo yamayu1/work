@@ -16,7 +16,7 @@ export async function PlayerCoordinate(messageList,input,output,board){
         console.log(errorMessage2);
         return PlayerCoordinate(messageList,input,output,board)
     }
-    return [y,x];
+    return [x,y];
 }
 
 export async function PlayerChoice(messageList, input, output) {

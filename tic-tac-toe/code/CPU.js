@@ -1,39 +1,19 @@
-import * as readline from 'node:readline/promises';
-import { stdin as input, stdout as output } from 'node:process';
-// let array = [0,1,2];
-//             [0,1,2];
-//             [0,1,2];
-        
-// console.log(array[0,0],array[0,1],array[0,2]);
-// console.log(array[1,0],array[1,1],array[1,2]);
-// console.log(array[0,0],array[0,1],array[0,2]);
+//取るマスの優先順位
+//真ん中、角、その他空いている場所
 
-
-// const readline = require('readline');
-// const readInterface = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-// });
-// const choice = await readInterface.question("入力してください >");
-//     readInterface.close();
-//     return choice;
-// }
-
-// function ma(){
-//     const a = intr();
-//     console.log(a);
-// }
-
-// ma();
-
-
-async function intr(){
-const rl = readline.createInterface({ input, output });
-
-const answer = await rl.question('What do you think of Node.js? ');
-
-console.log(`Thank you for your valuable feedback: ${answer}`);
-
-rl.close();
+export function CPU(board){
+//     if (board[1][1] === ' ') {
+//         let x = 1;
+//         let y = 1;
+//         return [x,y];
+//     }
+      for (let x = 0; x < 3; x++) {
+        for (let y = 0; y < 3; y++) {
+          if (board[x][y] === ' ') {
+            let a = x;
+            let b = y;
+            return [a,b];
+          }
+        }
+      }
 }
-intr();

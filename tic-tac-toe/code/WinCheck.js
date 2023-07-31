@@ -10,38 +10,56 @@
 //判定するのみの関数にする。（勝利だったら、ブーリアンで値を返す）
 
 
-function win(mark){//関数名の変更
-    // let mark = "";
-    // //まるかバツかを取得
-    // if( turn === first){
-    //     mark = '⚫︎';
-    // }else{
-    //     mark = '✖️';
+export function win(mark,board){//関数名の変更
+    //ヨコ方向を判定
+    // if(board[0][0] && board[0][1] && board[0][2] === mark ){
+    //     if(board[1][0] && board[1][1] && board[1][2] === mark ){
+    //         if(board[2][0] && board[2][1] && board[2][2] === mark ){
+    //         return true;
+    //         }
+    //     }
+    // }
+    // //タテ方向を判定
+    // if(board[0][0] && board[1][0] && board[2][0] === mark ){
+    //     if(board[0][1] && board[1][1] && board[2][1] === mark ){
+    //         if(board[0][2] && board[1][2] && board[2][2] === mark ){
+    //         return true;
+    //         }
+    //     }
+    // }
+    // //右斜方向を判定
+    // if(board[0][0] && board[1][1] && board[2][2] === mark ){
+    //     return true;
     // }
 
-    //ヨコ方向を判定
-    if(boart[0][0] && boart[0][1] && boart[0][2] == mark ){
-        if(boart[1][0] && boart[1][1] && boart[1][2] == mark ){
-            if(boart[2][0] && boart[2][1] && boart[2][2] == mark ){
-            return true;
-            }
-        }
-    }
-    //タテ方向を判定
-    if(boart[0][0] && boart[1][0] && boart[2][0] == mark ){
-        if(boart[0][1] && boart[1][1] && boart[2][1] == mark ){
-            if(boart[0][2] && boart[1][2] && boart[2][2] == mark ){
-            return true;
-            }
-        }
-    }
-    //右斜方向を判定
-    if(boart[0][0] && boart[1][1] && boart[2][2] == mark ){
-        return true;
-    }
+    // //左斜方向を判定
+    // if(board[2][0] && board[1][1] && board[0][2] === mark ){
+    //     return true;
+    // }
+    // return false;
 
-    //左斜方向を判定
-    if(boart[2][0] && boart[1][1] && boart[0][2] == mark ){
+    for (let i = 0; i < 3; i++) {
+        if (board[i][0] === mark && board[i][1] === mark && board[i][2] === mark) {
+          return true;
+        }
+      }
+    
+      // タテ方向を判定
+      for (let i = 0; i < 3; i++) {
+        if (board[0][i] === mark && board[1][i] === mark && board[2][i] === mark) {
+          return true;
+        }
+      }
+    
+      // 右斜方向を判定
+      if (board[0][0] === mark && board[1][1] === mark && board[2][2] === mark) {
         return true;
-    }
+      }
+    
+      // 左斜方向を判定
+      if (board[0][2] === mark && board[1][1] === mark && board[2][0] === mark) {
+        return true;
+      }
+    
+      return false;
 }
