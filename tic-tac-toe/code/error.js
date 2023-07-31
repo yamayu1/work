@@ -1,6 +1,10 @@
 
-export function Error_number(number){   
-    if( number === undefined || number === null || number !== "0" && number !== "1" && number !== "2"){
+export function Error_number(x,y){   
+    if( x === undefined || x === null || x !== "0" && x !== "1" && x !== "2"){
+        const ErrorMessage = "X列、Y列は0から2までの数字を入力してください";
+        return [true,ErrorMessage];
+    }
+    if( y === undefined || y === null || y !== "0" && y !== "1" && y !== "2"){
         const ErrorMessage = "X列、Y列は0から2までの数字を入力してください";
         return [true,ErrorMessage];
     }
