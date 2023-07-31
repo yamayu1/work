@@ -45,14 +45,14 @@ while (true) {
     let trueChange = nextTurn(mark);
     mark = trueChange;
 
-    console.log("CPUが入力中です。")
+    console.log("CPUのターンです。");
     let cpuMove = CPU(board);
     board[cpuMove[1]][cpuMove[0]] = mark;
     console.log(board.join('\n'));
 
     winCheck = win(mark, board);
     if (winCheck === true) {
-        console.log(messageList["win"]);
+        console.log(messageList["lose"]);
         break;
     }
 

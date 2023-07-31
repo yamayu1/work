@@ -10,35 +10,8 @@
 //判定するのみの関数にする。（勝利だったら、ブーリアンで値を返す）
 
 
-export function win(mark,board){//関数名の変更
-    //ヨコ方向を判定
-    // if(board[0][0] && board[0][1] && board[0][2] === mark ){
-    //     if(board[1][0] && board[1][1] && board[1][2] === mark ){
-    //         if(board[2][0] && board[2][1] && board[2][2] === mark ){
-    //         return true;
-    //         }
-    //     }
-    // }
-    // //タテ方向を判定
-    // if(board[0][0] && board[1][0] && board[2][0] === mark ){
-    //     if(board[0][1] && board[1][1] && board[2][1] === mark ){
-    //         if(board[0][2] && board[1][2] && board[2][2] === mark ){
-    //         return true;
-    //         }
-    //     }
-    // }
-    // //右斜方向を判定
-    // if(board[0][0] && board[1][1] && board[2][2] === mark ){
-    //     return true;
-    // }
-
-    // //左斜方向を判定
-    // if(board[2][0] && board[1][1] && board[0][2] === mark ){
-    //     return true;
-    // }
-    // return false;
-
-    for (let i = 0; i < 3; i++) {
+export function win(mark,board){//関数名の変更  
+     for (let i = 0; i < 3; i++) {
         if (board[i][0] === mark && board[i][1] === mark && board[i][2] === mark) {
           return true;
         }

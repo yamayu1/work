@@ -2,7 +2,6 @@ import { Error_number, choiceError, Error_coordinate } from "./error.js";
 import * as readline from 'node:readline/promises';
 
 export async function PlayerCoordinate(messageList,input,output,board){
-    // console.log(board);
     const rl = readline.createInterface({ input, output });
     let x = await rl.question(messageList["coordinate_x"]);
     let y = await rl.question(messageList["coordinate_y"]);

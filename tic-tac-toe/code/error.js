@@ -12,7 +12,7 @@ export function Error_number(x,y){
 }
 
 export function Error_coordinate(x,y,board){
-    if (board[x][y] !== ' ') {
+    if (board[y][x] !== ' ') {
         const ErrorMessage = "すでに埋まってます。他のマスを選択してください！";
         return [true,ErrorMessage];
         }
