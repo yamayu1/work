@@ -11,13 +11,17 @@ const messageList = {
     coordinate_y: "Y列の座標を入力してください > ", win: "Win", lose: "Lose", draw: "Draw"
 };
 let mark = "";
+let winCheck = "";
+let drawCheck = "";
+let trueChange = "";
+
 let board = [
     [' ',' ',' '],
     [' ',' ',' '],
     [' ',' ',' ']
 ];
 
-let select_turn = await PlayerChoice(messageList, input, output,);
+let select_turn = await PlayerChoice(messageList, input, output);
 if (select_turn === '0') {
     mark = '○';
 } else {
@@ -26,25 +30,29 @@ if (select_turn === '0') {
 console.log(board.join('\n'));
 
 while (true) {
+    if(select_turn === '0' || select_turn === ""){
+    select_turn = "";
     let select_coordinate = await PlayerCoordinate(messageList, input, output, board);
     board[select_coordinate[1]][select_coordinate[0]] = mark;
     console.log(board.join('\n'));
 
-    let winCheck = win(mark, board);
+    winCheck = win(mark, board);
     if (winCheck === true) {
         console.log(messageList["win"]);
         break;
     }
 
-    let drawCheck = draw(board);
+    drawCheck = draw(board);
     if (drawCheck === true) {
         console.log(messageList["draw"]);
         break;
     }
 
-    let trueChange = nextTurn(mark);
+    trueChange = nextTurn(mark);
     mark = trueChange;
+    }
 
+    select_turn = "";
     console.log("CPUのターンです。");
     let cpuMove = CPU(board);
     board[cpuMove[1]][cpuMove[0]] = mark;
