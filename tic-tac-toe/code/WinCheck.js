@@ -10,7 +10,7 @@
 //判定するのみの関数にする。（勝利だったら、ブーリアンで値を返す）
 
 
-export function win(mark,board){//関数名の変更  
+export function win(mark,board){  
      for (let i = 0; i < 3; i++) {
         if (board[i][0] === mark && board[i][1] === mark && board[i][2] === mark) {
           return true;

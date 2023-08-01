@@ -21,6 +21,8 @@ let board = [
     [' ',' ',' ']
 ];
 
+
+//先攻・後攻を選択
 let select_turn = await PlayerChoice(messageList, input, output);
 if (select_turn === '0') {
     mark = '○';
@@ -29,46 +31,58 @@ if (select_turn === '0') {
 }
 console.log(board.join('\n'));
 
+
 while (true) {
+    //後攻の場合、プレイヤーのターンをスキップ
     if(select_turn === '0' || select_turn === ""){
-    select_turn = "";
-    let select_coordinate = await PlayerCoordinate(messageList, input, output, board);
-    board[select_coordinate[1]][select_coordinate[0]] = mark;
-    console.log(board.join('\n'));
+        select_turn = "";
 
-    winCheck = win(mark, board);
-    if (winCheck === true) {
-        console.log(messageList["win"]);
-        break;
+    //プレイヤーターン
+        let select_coordinate = await PlayerCoordinate(messageList, input, output, board);
+        board[select_coordinate[1]][select_coordinate[0]] = mark;
+        console.log(board.join('\n'));
+
+    //勝敗確認
+        winCheck = win(mark, board);
+        if (winCheck === true) {
+            console.log(messageList["win"]);
+            break;
+        }
+
+    //ドローの確認
+        drawCheck = draw(board);
+        if (drawCheck === true) {
+            console.log(messageList["draw"]);
+            break;
+        }
+
+    //ターンを交代
+        trueChange = nextTurn(mark);
+        mark = trueChange;
     }
 
-    drawCheck = draw(board);
-    if (drawCheck === true) {
-        console.log(messageList["draw"]);
-        break;
-    }
-
-    trueChange = nextTurn(mark);
-    mark = trueChange;
-    }
-
+    //CPUのターン
     select_turn = "";
     console.log("CPUのターンです。");
     let cpuMove = CPU(board);
     board[cpuMove[1]][cpuMove[0]] = mark;
     console.log(board.join('\n'));
 
+    //勝敗確認
     winCheck = win(mark, board);
     if (winCheck === true) {
         console.log(messageList["lose"]);
         break;
     }
 
+    //ドローの確認
     drawCheck = draw(board);
     if (drawCheck === true) {
         console.log(messageList["draw"]);
         break;
     }
+
+    //ターンを交換
     trueChange = nextTurn(mark);
     mark = trueChange;
 }

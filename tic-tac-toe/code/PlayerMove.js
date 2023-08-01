@@ -1,11 +1,15 @@
 import { Error_number, choiceError, Error_coordinate } from "./error.js";
 import * as readline from 'node:readline/promises';
 
+
 export async function PlayerCoordinate(messageList,input,output,board){
+    //座標を入力するインターフェイスを作成
     const rl = readline.createInterface({ input, output });
     let x = await rl.question(messageList["coordinate_x"]);
     let y = await rl.question(messageList["coordinate_y"]);
     rl.close();
+
+    //座標のエラー確認
     const [error_number, errorMessage] = Error_number(x,y);
     if(error_number === true){
         console.log(errorMessage);
@@ -20,10 +24,12 @@ export async function PlayerCoordinate(messageList,input,output,board){
 }
 
 export async function PlayerChoice(messageList, input, output) {
+    //先攻・後攻を入力するインターフェイスを作成
     const rl = readline.createInterface({ input, output });
     const answer = await rl.question(messageList["select_turn"]);
     rl.close();
     
+    //先攻・後攻のエラー確認
     const [error, errorMessage] = choiceError(answer);
     if(error === true){
     console.log(errorMessage);
