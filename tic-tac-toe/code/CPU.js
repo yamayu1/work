@@ -25,4 +25,4 @@ export function CPU(board){
       }
     }
   }
-}
+} 
