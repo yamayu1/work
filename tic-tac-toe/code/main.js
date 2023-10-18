@@ -5,6 +5,7 @@ import { win } from "./WinCheck.js";
 import { draw } from "./DrawCheck.js";
 import { stdin as input, stdout as output } from 'node:process';
 import { nextTurn } from "./nextTurn.js";
+import { minmax } from "./CPU2.js";
 
 const messageList = {
     select_turn: "先攻なら「0」,後攻なら「1」を入力してください > ", coordinate_x: "X列の座標を入力してください > ",
@@ -61,14 +62,27 @@ while (true) {
         mark = trueChange;
     }
 
+    // //CPUのターン
+    // select_turn = "";
+    // console.log("CPUのターンです。");
+    // let cpuMove = CPU(board);
+    // board[cpuMove[1]][cpuMove[0]] = mark;
+    // console.log(board.join('\n'));
+
     //CPUのターン
     select_turn = "";
     console.log("CPUのターンです。");
-    let cpuMove = CPU(board);
-    board[cpuMove[1]][cpuMove[0]] = mark;
+    let cpuMove = minmax(mark,board);
+    console.log(cpuMove);
+    let row = cpuMove.index.row;
+    let col = cpuMove.index.col;
+    console.log(row);
+    console.log(col);
+    board[row][col] = mark;
     console.log(board.join('\n'));
 
-    //勝敗確認
+
+    // //勝敗確認
     winCheck = win(mark, board);
     if (winCheck === true) {
         console.log(messageList["lose"]);
